@@ -1,0 +1,36 @@
+{% load static %}
+
+<link rel="stylesheet"
+href="{% static 'css/estilos.css' %}">
+
+
+<div class="detalle">
+
+
+<h1>
+{{tarea.titulo}}
+</h1>
+
+
+<p>
+{{tarea.detalle}}
+</p>
+
+
+<hr>
+
+
+Fecha:
+
+{{tarea.fecha_creacion}}
+
+
+<br><br>
+
+
+<a href="{% url 'pizarra' %}">
+Volver
+</a>
+
+
+</div>

@@ -1,0 +1,144 @@
+body{
+
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:
+    radial-gradient(#444,#111);
+
+    min-height:100vh;
+}
+
+
+
+.contenedor{
+
+    padding:40px;
+
+}
+
+
+
+h1{
+
+    color:white;
+    text-align:center;
+
+}
+
+
+
+.botones{
+
+    text-align:center;
+    margin-bottom:30px;
+
+}
+
+
+
+button,
+a{
+
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+    cursor:pointer;
+
+}
+
+
+
+.crear{
+
+    background:#00c853;
+    color:white;
+
+}
+
+
+
+.tablero{
+
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.postit{
+
+    min-height:200px;
+
+    padding:20px;
+
+    background:#fff176;
+
+    box-shadow:
+    8px 8px 15px #000;
+
+    transform:rotate(-2deg);
+
+}
+
+
+
+.postit:nth-child(even){
+
+    background:#81d4fa;
+    transform:rotate(3deg);
+
+}
+
+
+
+.postit h2{
+
+    margin-top:0;
+
+}
+
+
+
+.acciones{
+
+    margin-top:20px;
+
+}
+
+
+
+.detalle{
+
+    background:white;
+    padding:30px;
+    border-radius:10px;
+
+    max-width:600px;
+    margin:auto;
+
+}
+
+
+
+input,textarea{
+
+    width:100%;
+    padding:12px;
+    margin:10px;
+
+}
+
+
+
+form{
+
+    background:white;
+    padding:30px;
+    border-radius:10px;
+
+}

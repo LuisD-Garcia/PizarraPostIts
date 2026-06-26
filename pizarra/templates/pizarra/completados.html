@@ -1,0 +1,49 @@
+{% load static %}
+
+<link rel="stylesheet"
+href="{% static 'css/estilos.css' %}">
+
+
+<div class="contenedor">
+
+
+<h1>✅ Tareas completadas</h1>
+
+
+<div class="tablero">
+
+
+{% for tarea in tareas %}
+
+
+<div class="postit">
+
+
+<h2>{{tarea.titulo}}</h2>
+
+
+<p>
+{{tarea.detalle}}
+</p>
+
+
+<a href="{% url 'eliminar' tarea.id %}">
+Eliminar
+</a>
+
+
+</div>
+
+
+{% empty %}
+
+<h2>No hay tareas terminadas</h2>
+
+
+{% endfor %}
+
+
+</div>
+
+
+</div>

@@ -1,0 +1,51 @@
+{% load static %}
+
+<link rel="stylesheet"
+href="{% static 'css/estilos.css' %}">
+
+
+
+<form method="POST">
+
+
+{% csrf_token %}
+
+
+<h1>
+Crear / Editar Post-it
+</h1>
+
+
+
+<input
+
+name="titulo"
+
+placeholder="Título"
+
+value="{{tarea.titulo}}"
+
+>
+
+
+
+<textarea
+
+name="detalle"
+
+placeholder="Detalle">
+
+{{tarea.detalle}}
+
+</textarea>
+
+
+
+<button>
+
+Guardar
+
+</button>
+
+
+</form>

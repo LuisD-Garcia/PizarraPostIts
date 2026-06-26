@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Pizarra</title>
+
+<link rel="stylesheet"
+href="{% static 'css/estilos.css' %}">
+
+</head>
+
+
+<body>
+
+
+<div class="contenedor">
+
+
+<h1>📝 Mis Post-its</h1>
+
+
+<div class="botones">
+
+<a class="crear"
+href="{% url 'crear' %}">
+Crear Nuevo Post-it
+</a>
+
+
+<a href="{% url 'completados' %}">
+Completados
+</a>
+
+
+</div>
+
+
+
+<div class="tablero">
+
+
+{% for tarea in tareas %}
+
+
+<div class="postit">
+
+
+<h2>
+{{tarea.titulo}}
+</h2>
+
+
+<p>
+{{tarea.detalle|truncatechars:80}}
+</p>
+
+
+
+<div class="acciones">
+
+
+<a href="{% url 'detalle' tarea.id %}">
+Detalle
+</a>
+
+
+<a href="{% url 'editar' tarea.id %}">
+Editar
+</a>
+
+
+<a href="{% url 'completar' tarea.id %}">
+Completar
+</a>
+
+
+<a href="{% url 'eliminar' tarea.id %}">
+Eliminar
+</a>
+
+
+</div>
+
+
+</div>
+
+
+{% empty %}
+
+<h2>No hay tareas pendientes</h2>
+
+{% endfor %}
+
+
+</div>
+
+</div>
+
+
+</body>
+
+</html>
