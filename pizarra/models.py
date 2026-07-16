@@ -1,6 +1,6 @@
-
 # Create your models here.
 from django.db import models
+from django.conf import settings
 
 
 class PostIt(models.Model):
@@ -17,6 +17,13 @@ class PostIt(models.Model):
 
     fecha_creacion = models.DateTimeField(
         auto_now_add=True
+    )
+
+    
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE,
+        null=True, blank=True
     )
 
 

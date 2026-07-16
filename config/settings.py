@@ -70,6 +70,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
+# Autenticación
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'pizarra'
+LOGOUT_REDIRECT_URL = 'login'
+
+
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
@@ -120,4 +127,3 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "pizarra/static"
 ]
-

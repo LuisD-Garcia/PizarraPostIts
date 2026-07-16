@@ -107,6 +107,57 @@ a{
 .acciones{
 
     margin-top:20px;
+    display:flex;
+    gap:8px;
+
+}
+
+
+
+.acciones a{
+
+    background:rgba(0,0,0,0.15);
+    color:#111;
+    padding:8px 12px;
+
+}
+
+
+
+.acciones a:hover{
+
+    background:rgba(0,0,0,0.3);
+
+}
+
+
+
+.btn-crear{
+
+    display:inline-flex;
+    align-items:center;
+
+}
+
+
+
+.sin-tareas{
+
+    grid-column:1/-1;
+    text-align:center;
+    color:#ccc;
+    padding:60px 20px;
+
+}
+
+
+
+.sin-tareas i{
+
+    font-size:2.5rem;
+    color:#fff176;
+    display:block;
+    margin-bottom:15px;
 
 }
 

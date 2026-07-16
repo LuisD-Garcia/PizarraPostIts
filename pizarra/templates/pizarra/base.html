@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block titulo %}Pizarra{% endblock %}</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+{% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<!-- ===== Sidebar ===== -->
+<nav id="sidebar" class="sidebar">
+
+    <div class="sidebar-brand">
+        <i class="bi bi-sticky-fill"></i> <span>Pizarra</span>
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li>
+            <a href="{% url 'pizarra' %}"
+               class="{% if request.resolver_match.url_name == 'pizarra' %}activo{% endif %}">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Inicio</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'crear' %}"
+               class="{% if request.resolver_match.url_name == 'crear' %}activo{% endif %}">
+                <i class="bi bi-plus-circle-fill"></i>
+                <span>Nueva tarea</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'completados' %}"
+               class="{% if request.resolver_match.url_name == 'completados' %}activo{% endif %}">
+                <i class="bi bi-check2-circle"></i>
+                <span>Historial</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'perfil' %}"
+               class="{% if request.resolver_match.url_name == 'perfil' %}activo{% endif %}">
+                <i class="bi bi-person-circle"></i>
+                <span>Mi perfil</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'logout' %}">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Cerrar sesión</span>
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<!-- Fondo oscuro cuando el sidebar está abierto en móvil -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+<!-- ===== Contenido principal ===== -->
+<div class="main-content" id="mainContent">
+
+    <!-- Navbar superior -->
+    <nav class="navbar-top">
+
+        <button class="btn-toggle" id="sidebarToggle" aria-label="Abrir menú">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <span class="navbar-title">{% block encabezado %}Pizarra{% endblock %}</span>
+
+        <div class="dropdown usuario-dropdown">
+
+            <button class="btn usuario-btn dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-fill"></i>
+                {% if request.user.is_authenticated %}
+                    {{ request.user.username }}
+                {% else %}
+                    Invitado
+                {% endif %}
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item" href="{% url 'perfil' %}">
+                        <i class="bi bi-person-circle me-2"></i>Mi perfil
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item text-danger" href="{% url 'logout' %}">
+                        <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <!-- Mensajes del sistema (django.contrib.messages) -->
+    {% if messages %}
+        <div class="contenedor-mensajes">
+            {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags|default:'info' }}{% endif %} alert-dismissible fade show"
+                     role="alert">
+
+                    {% if message.tags == 'success' %}
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                    {% elif message.tags == 'error' %}
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    {% elif message.tags == 'warning' %}
+                        <i class="bi bi-exclamation-circle-fill me-2"></i>
+                    {% else %}
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                    {% endif %}
+
+                    {{ message }}
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Contenido de cada página -->
+    <div class="contenido">
+        {% block content %}{% endblock %}
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    function cerrarSidebar() {
+        sidebar.classList.remove('abierto');
+        sidebarOverlay.classList.remove('visible');
+    }
+
+    sidebarToggle.addEventListener('click', function () {
+        sidebar.classList.toggle('abierto');
+        sidebarOverlay.classList.toggle('visible');
+    });
+
+    sidebarOverlay.addEventListener('click', cerrarSidebar);
+
+</script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>
